@@ -1,7 +1,9 @@
 use std::time::Duration;
 
-use actix_web::{middleware, web, App, HttpResponse, HttpServer};
+use actix_web::{dev::ServiceRequest, middleware, web, App, Error, HttpResponse, HttpServer};
+use actix_web_httpauth::{extractors::basic::BasicAuth, middleware::HttpAuthentication};
 use colamooon_api::{models::AppState, router_config::config_router};
+use log::info;
 use migration::{Migrator, MigratorTrait};
 use sea_orm::{ConnectOptions, Database};
 
@@ -30,9 +32,11 @@ async fn main() -> std::io::Result<()> {
     let state = AppState { conn };
     // Start HTTP server
     HttpServer::new(move || {
+        // let auth = HttpAuthentication::basic(validator);
         App::new()
             // set up DB pool to be used with web::Data<Pool> extractor
             .wrap(middleware::Logger::default())
+            // .wrap(auth)
             .app_data(web::Data::new(state.clone()))
             .configure(config_router)
             .route(

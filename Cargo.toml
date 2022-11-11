@@ -12,6 +12,7 @@ members = [".", "entity", "migration"]
 entity = { path = "entity" }
 migration = { path = "migration" }
 actix-web = "4"
+actix-web-httpauth = "0.8.0"
 sea-orm = { version = "^0", features = [ "debug-print", "runtime-actix-native-tls", "sqlx-mysql", "macros" ] }
 dotenv = "0.15"
 env_logger = "0.9"

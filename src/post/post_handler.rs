@@ -2,7 +2,7 @@ use actix_web::{web, Error, HttpResponse};
 
 use crate::models::{AppState, PageInfo};
 
-use super::{post::NewPostReq, post_service};
+use super::{post_model::NewPostReq, post_service};
 
 pub async fn get_posts(
     data: web::Data<AppState>,
@@ -10,7 +10,7 @@ pub async fn get_posts(
 ) -> Result<HttpResponse, Error> {
     print!("]-----] post_handler::get_posts [------[");
     let conn = &data.conn;
-    let (posts, _num_pages) = post_service::find_all_post(conn, page_info.page, page_info.size)
+    let posts = post_service::find_all_post(conn, page_info.page, page_info.size)
         .await
         .expect("Cannot find posts in page");
     Ok(HttpResponse::Ok().json(posts))
