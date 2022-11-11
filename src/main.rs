@@ -1,9 +1,9 @@
 use std::time::Duration;
 
-use actix_web::{dev::ServiceRequest, middleware, web, App, Error, HttpResponse, HttpServer};
-use actix_web_httpauth::{extractors::basic::BasicAuth, middleware::HttpAuthentication};
+use actix_web::{middleware, web, App, HttpResponse, HttpServer};
+
 use colamooon_api::{models::AppState, router_config::config_router};
-use log::info;
+
 use migration::{Migrator, MigratorTrait};
 use sea_orm::{ConnectOptions, Database};
 

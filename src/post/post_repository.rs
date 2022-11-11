@@ -23,7 +23,7 @@ impl PostRepository {
     }
 
     pub async fn create(db: &DbConn, new_post: post::ActiveModel) -> Result<post::Model, DbErr> {
-        let now = Utc::now();
+        let _now = Utc::now();
         // new_post.created_at = Some(now);
         
         new_post.insert(db).await

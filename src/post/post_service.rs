@@ -1,4 +1,4 @@
-use ::entity::{post, post::Entity as Post};
+use ::entity::{post};
 use chrono::Utc;
 use log::info;
 use migration::DbErr;
